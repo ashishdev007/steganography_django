@@ -13,13 +13,13 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from django.contrib import admin
+# from django.contrib import admin
 from django.urls import path
 from apps.endpoints.views import decode, encode, homePage, hide,retrieve, statusMeter, statusId
 from apps.steganography.test import myView
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    # path('admin/', admin.site.urls),
     path('test/', myView, name="test" ),
     path("decode/<int:id>", decode, name="decode"),
     path("encode/<int:id>", encode, name="encode"),

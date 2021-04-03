@@ -32,7 +32,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'django.contrib.admin',
+    # 'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -152,10 +152,10 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'endpoints/static/'),
-    os.path.join(BASE_DIR, 'steganography/static/'),
-]
+# STATICFILES_DIRS = [
+#     os.path.join(BASE_DIR, 'endpoints/static/'),
+#     os.path.join(BASE_DIR, 'steganography/static/'),
+# ]
 
 STATICFILES_FINDERS = [
     'django.contrib.staticfiles.finders.FileSystemFinder',
@@ -165,3 +165,5 @@ STATICFILES_FINDERS = [
 STATICFILES_STORAGE = "django.contrib.staticfiles.storage.StaticFilesStorage"
 
 APPEND_SLASH = True
+
+STATIC_ROOT = os.path.join(BASE_DIR, "static")
