@@ -21,7 +21,7 @@ function handleSubmit(event) {
   let text = event.target.elements.text.value;
   let txtFile = event.target.elements.textFile.files[0];
 
-  fetch('http://127.0.0.1:8000/status/')
+  fetch(window.location.origin + '/status/')
     .then((res) => res.json())
     .then((data) => {
       statusId = data['id'];
@@ -40,7 +40,7 @@ function sendForEncoding(statusId, image, text, txtFile) {
     'Encoding your Image...';
 
   switchDisplays('second', 'third');
-  fetch(`http://127.0.0.1:8000/encode/${statusId}`, {
+  fetch(window.location.origin + `/encode/${statusId}`, {
     method: 'POST',
     body: data,
   })

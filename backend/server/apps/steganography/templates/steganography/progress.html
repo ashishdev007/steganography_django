@@ -43,8 +43,7 @@
     </div>
     <script>
       function goHome() {
-        loc = window.location.href.split('/');
-        window.location.href = loc.slice(0, loc.length - 1).join('/');
+        window.location.href = window.location.origin;
       }
       function move(statusId) {
         var elem = document.getElementById('myBar');
@@ -56,7 +55,7 @@
           if (waiting) return;
 
           waiting = true;
-          fetch(`http://127.0.0.1:8000/status/${statusId}`, {
+          fetch(window.location.origin + `/status/${statusId}`, {
             method: 'GET',
           })
             .then((res) => {

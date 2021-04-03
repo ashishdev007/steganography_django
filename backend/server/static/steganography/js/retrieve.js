@@ -12,7 +12,7 @@ const handleSubmit = async (event) => {
 
   let image = event.target.elements.image.files[0];
 
-  fetch('http://127.0.0.1:8000/status/')
+  fetch(window.location.origin + '/status/')
     .then((res) => res.json())
     .then((data) => {
       statusId = data['id'];
@@ -29,7 +29,7 @@ function sendForDecoding(statusId, image) {
   document.getElementById('progressHeader').innerHTML =
     'Retrieving the Message...';
 
-  fetch(`http://127.0.0.1:8000/decode/${statusId}`, {
+  fetch(window.location.origin + `/decode/${statusId}`, {
     method: 'POST',
     body: data,
   })

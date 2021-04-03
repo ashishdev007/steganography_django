@@ -16,11 +16,8 @@ Including another URLconf
 # from django.contrib import admin
 from django.urls import path
 from apps.endpoints.views import decode, encode, homePage, hide,retrieve, statusMeter, statusId
-from apps.steganography.test import myView
 
 urlpatterns = [
-    # path('admin/', admin.site.urls),
-    path('test/', myView, name="test" ),
     path("decode/<int:id>", decode, name="decode"),
     path("encode/<int:id>", encode, name="encode"),
     path("status/", statusId, name="statusId"),
