@@ -24,3 +24,5 @@ STOPSIGNAL SIGTERM
 RUN chmod +x /opt/app/start-server.sh
 
 CMD ["bash","/opt/app/start-server.sh"]
+
+WORKDIR /opt/app/steganography/server

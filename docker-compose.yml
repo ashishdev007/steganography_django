@@ -1,0 +1,52 @@
+version: '3.1'
+
+services:
+  mongodb:
+    image: mongo
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: admin
+      MONGO_INITDB_DATABASE: steganography
+    ports:
+      - 27017:27017
+
+  web:
+    build: .
+    image: steganography
+    restart: always
+    # command: gunicorn server.wsgi --user www-data --bind 0.0.0.0:8010 --workers 3
+    depends_on:
+      - mongodb
+    links:
+      - mongodb
+    ports:
+      - 8020:8020
+
+    # depends_on:
+    #   - nginx
+    #   - migration
+
+  # nginx:
+  #   build: .
+  #   image: steganography
+  #   restart: always
+  #   command: nginx -g "daemon off"
+  #   ports:
+  #     - 8020:8020
+
+  # migration:
+  #   image: steganography
+  #   command: python manage.py migrate
+  #   links:
+  #     - mongodb
+  #   depends_on:
+  #     - make_migrations
+
+  # make_migrations:
+  #   image: steganography
+  #   command: python manage.py makemigrations
+  #   links:
+  #     - mongodb
+  #   depends_on:
+  #     - mongodb
