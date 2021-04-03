@@ -12,21 +12,21 @@ def createStatus():
 
 def getStatusObject(id):
     try:
-        status = StatusTracker.objects.get(pk=id)
+        status = StatusTracker.objects.get(_id=id)
         return status
     except(ObjectDoesNotExist):
         return None
 
 def getProgress(id):
     try:
-        status = StatusTracker.objects.get(id=id)
+        status = StatusTracker.objects.get(_id=id)
         return status.progress
     except(ObjectDoesNotExist):
         return -1
 
 def setProgress(id, progress):
     try:
-        status = StatusTracker.objects.get(pk=id)
+        status = StatusTracker.objects.get(_id=id)
         status.progress = progress
         status.save()
     except(ObjectDoesNotExist):
@@ -35,7 +35,7 @@ def setProgress(id, progress):
 def setProgressMultiProcessing(id, progress, lock):
     with lock:
         try:
-            status = StatusTracker.objects.get(pk=id)
+            status = StatusTracker.objects.get(_id=id)
             if progress > status.progress:
                 print(f"Setting Progress to {progress}")
                 status.progress = progress
@@ -46,7 +46,7 @@ def setProgressMultiProcessing(id, progress, lock):
 
 def deleteStatus(id):
     try:
-        status = StatusTracker.objects.get(id=id)
+        status = StatusTracker.objects.get(_id=id)
         status.delete()
     except(ObjectDoesNotExist):
         pass

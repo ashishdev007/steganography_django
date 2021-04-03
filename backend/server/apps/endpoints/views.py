@@ -3,9 +3,11 @@ from django.http import HttpResponse, JsonResponse
 from apps.steganography.allPixels import enhanced_hide, enhanced_retr, rgb2hex
 from apps.steganography.models import StatusTracker
 from apps.steganography.utils.status import createStatus, getProgress, deleteStatus, temp
+from apps.steganography.utils.others import JSONEncoder
 # Create your views here.
 from PIL import Image
 from django import forms
+import json
 
 class UploadFileForm(forms.Form):
     title = forms.CharField(max_length=50)
@@ -13,7 +15,8 @@ class UploadFileForm(forms.Form):
 
 def statusId(request):
     status = createStatus()
-    return JsonResponse({"id": status.id})
+    a = JSONEncoder().encode({"id": status._id}) 
+    return HttpResponse(a)
 
 def decode(request, id):
     image = request.FILES.get("image")
@@ -30,8 +33,6 @@ def encode(request, id):
     Turn on CSRF middleware in settings.py later
     """
 
-    print(request)
-
     if request.method == "GET":
         return JsonResponse({"Success": False})
 
@@ -42,8 +43,6 @@ def encode(request, id):
     if txtFile:
         text  = txtFile.read()
     
-    print(text)
-
     image = request.FILES.get("image")
 
     img = enhanced_hide(image, text, id)
@@ -65,4 +64,5 @@ def retrieve(request):
 
 def statusMeter(request, id):
     progress = getProgress(id)
-    return JsonResponse({"progress": progress})
+    a = JSONEncoder().encode({"progress": progress}) 
+    return HttpResponse(a)
